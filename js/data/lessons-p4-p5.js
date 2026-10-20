@@ -3662,3 +3662,246 @@ CP.lessons.push(
   standards: ["NIST SP 800-34 Rev 1", "ISO 22301:2019", "ISO/IEC 27031"]
 }
 );
+
+/* ===================== p5-d8 Software Development Security (10%) ===================== */
+CP.lessons.push(
+{
+  id: "p5-d8-l1",
+  module: "p5-d8",
+  title: "SDLC Models, DevSecOps and Maturity Models (CMMI, SAMM)",
+  minutes: 20,
+  objectives: [
+    "Integrate security into each SDLC phase",
+    "Compare waterfall, spiral, agile, DevOps and DevSecOps",
+    "Describe CMMI levels, OWASP SAMM and BSIMM",
+    "Explain change management and the IDEAL model in software development"
+  ],
+  html: `
+<p>Domain 8 is <strong>10%</strong> of the exam. Its core message: security must be built in throughout development, not bolted on at the end. Fixing a flaw in production costs far more than fixing it in design.</p>
+
+<h3>SDLC phases and security activities</h3>
+<table>
+<thead><tr><th>Phase</th><th>Security activities</th></tr></thead>
+<tbody>
+<tr><td>Initiation / requirements</td><td>Define security and privacy requirements, data classification, compliance needs; security should be involved from the start</td></tr>
+<tr><td>Design</td><td>Threat modeling, secure architecture, attack surface analysis, design reviews</td></tr>
+<tr><td>Development</td><td>Secure coding standards, code review, SAST, SCA, secret scanning</td></tr>
+<tr><td>Testing</td><td>DAST, fuzzing, penetration testing, misuse case testing, regression testing</td></tr>
+<tr><td>Deployment / implementation</td><td>Secure configuration, certification and accreditation (authorization), change management</td></tr>
+<tr><td>Operations and maintenance</td><td>Patching, monitoring, vulnerability management, change control</td></tr>
+<tr><td>Disposal</td><td>Data sanitization, decommissioning, retention compliance</td></tr>
+</tbody>
+</table>
+<p>The SDLC (system development lifecycle) is broader than the software development lifecycle; both are tested. Also know <strong>certification</strong> (technical evaluation of controls) and <strong>accreditation</strong> (management's formal acceptance of risk).</p>
+
+<h3>Development methodologies</h3>
+<table>
+<thead><tr><th>Model</th><th>Description</th><th>Security consideration</th></tr></thead>
+<tbody>
+<tr><td>Waterfall</td><td>Sequential phases; each completes before the next. Modified waterfall allows going back one phase.</td><td>Clear documentation and review gates; late discovery of issues is expensive</td></tr>
+<tr><td>Spiral (Boehm)</td><td>Iterative cycles, each with planning, <strong>risk analysis</strong>, engineering and evaluation; produces prototypes</td><td>Explicit risk analysis each iteration</td></tr>
+<tr><td>Rapid Application Development (RAD) / prototyping</td><td>Fast prototypes with user feedback</td><td>Prototypes may become production without hardening</td></tr>
+<tr><td>Agile (Scrum, Kanban)</td><td>Short sprints, working software, collaboration; values from the 2001 Agile Manifesto</td><td>Include security stories, abuse cases and definition-of-done criteria in each sprint</td></tr>
+<tr><td>DevOps</td><td>Development and operations collaborate with continuous integration and delivery (CI/CD)</td><td>Speed requires automated security</td></tr>
+<tr><td>DevSecOps</td><td>Security integrated into DevOps as a shared responsibility, automated in pipelines ("shift left")</td><td>The modern target state</td></tr>
+<tr><td>Cleanroom</td><td>Formal methods and statistical testing to prevent defects</td><td>High assurance</td></tr>
+</tbody>
+</table>
+
+<h3>Maturity models</h3>
+<h4>CMMI (Capability Maturity Model Integration)</h4>
+<p>Originally the SEI's Software CMM, now maintained by ISACA. Know the five maturity levels:</p>
+<ol>
+<li><strong>Initial</strong>: ad hoc, chaotic, depends on individual heroics.</li>
+<li><strong>Managed</strong> (Repeatable in the older SW-CMM): basic project management; processes repeatable at project level.</li>
+<li><strong>Defined</strong>: standardized, documented processes across the organization.</li>
+<li><strong>Quantitatively Managed</strong>: processes measured and controlled with metrics.</li>
+<li><strong>Optimizing</strong>: continuous process improvement.</li>
+</ol>
+<div class="callout tip">Mnemonic: "<strong>I M</strong>ust <strong>D</strong>efine <strong>Q</strong>uality <strong>O</strong>ften" for Initial, Managed, Defined, Quantitatively Managed, Optimizing.</div>
+
+<h4>OWASP SAMM (Software Assurance Maturity Model)</h4>
+<p>SAMM v2 is an open framework with <strong>five business functions</strong>: <strong>Governance, Design, Implementation, Verification and Operations</strong>. Each function has three security practices (15 total), such as Threat Assessment, Secure Build, Security Testing and Incident Management, each rated on maturity levels 1 to 3. Organizations assess current state and build a roadmap.</p>
+
+<h4>BSIMM (Building Security In Maturity Model)</h4>
+<p>A <strong>descriptive</strong> model: it observes what real organizations' software security initiatives actually do and lets you compare against them. SAMM is <strong>prescriptive</strong> (what you should do). BSIMM organizes activities into four domains: Governance, Intelligence, SSDL Touchpoints and Deployment.</p>
+
+<h3>The IDEAL model</h3>
+<p>The SEI's model for process improvement: <strong>I</strong>nitiating, <strong>D</strong>iagnosing, <strong>E</strong>stablishing, <strong>A</strong>cting, <strong>L</strong>earning.</p>
+
+<h3>Operation, maintenance and change management</h3>
+<p>Software change management includes request control (users request changes, managers prioritize), change control (developers implement and test), and release control (final approval and deployment, removing debugging code and backdoors). Version control systems (Git) and code repositories must be protected: branch protection, signed commits, access control and secret scanning.</p>
+
+<h3>Integrated Product Teams and frameworks</h3>
+<p>Integrated product teams (IPTs) bring stakeholders together across disciplines. Key secure development frameworks: <strong>NIST SSDF (SP 800-218)</strong> with four practice groups (Prepare the Organization, Protect the Software, Produce Well-Secured Software, Respond to Vulnerabilities), <strong>Microsoft SDL</strong>, and CISA's <strong>Secure by Design</strong> principles, which push vendors to take ownership of customer security outcomes.</p>
+
+<div class="callout exam"><strong>Domain 8:</strong> "When should security be involved in the development process?" As early as possible, at project initiation. "Which model includes explicit risk analysis in each iteration?" Spiral. "Which CMMI level has standardized processes across the organization?" Level 3, Defined. SAMM is prescriptive; BSIMM is descriptive.</div>
+
+<div class="callout real"><strong>In practice:</strong> AppSec teams often run a SAMM assessment in a few interviews to baseline a development organization, then set targets like "reach level 2 in Security Testing by adding DAST to every pipeline this year."</div>
+`,
+  keyTerms: [
+    ["SDLC", "Lifecycle of a system or software from initiation to disposal"],
+    ["Spiral model", "Iterative development model with risk analysis each cycle"],
+    ["DevSecOps", "Integrating automated security into DevOps pipelines as a shared responsibility"],
+    ["CMMI", "Maturity model with five levels: Initial, Managed, Defined, Quantitatively Managed, Optimizing"],
+    ["OWASP SAMM", "Prescriptive software assurance maturity model with five business functions"],
+    ["BSIMM", "Descriptive model of observed software security activities across organizations"]
+  ],
+  standards: ["NIST SP 800-218 (SSDF)", "NIST SP 800-64 (withdrawn, historical)", "OWASP SAMM v2", "CMMI V3.0", "ISO/IEC 27034"]
+},
+{
+  id: "p5-d8-l2",
+  module: "p5-d8",
+  title: "Secure Coding: Weaknesses, Guidelines and Security in Development Environments",
+  minutes: 20,
+  objectives: [
+    "Identify source code weaknesses such as buffer overflows, race conditions and injection",
+    "Apply secure coding guidelines and standards",
+    "Secure APIs, code repositories and CI/CD pipelines",
+    "Describe programming language and runtime security concepts"
+  ],
+  html: `
+<p>Objective 8.5 covers secure coding guidelines and standards: security weaknesses at the source-code level, API security, secure coding practices, and software-defined security. Objective 8.2 covers the security of development ecosystems.</p>
+
+<h3>Common source code weaknesses</h3>
+<table>
+<thead><tr><th>Weakness</th><th>Description</th><th>Prevention</th></tr></thead>
+<tbody>
+<tr><td>Buffer overflow (CWE-120, CWE-787)</td><td>Writing past the end of a buffer, overwriting adjacent memory such as return addresses</td><td>Bounds checking, safe functions, memory-safe languages, ASLR, DEP, stack canaries</td></tr>
+<tr><td>Injection (SQL, command, LDAP, XML)</td><td>Untrusted input interpreted as code</td><td>Parameterized queries, allow-list validation, escaping</td></tr>
+<tr><td>Cross-site scripting (XSS)</td><td>Untrusted input rendered as script in browsers</td><td>Context-aware output encoding, Content Security Policy</td></tr>
+<tr><td>Cross-site request forgery (CSRF)</td><td>Forcing an authenticated user's browser to make unwanted requests</td><td>Anti-CSRF tokens, SameSite cookies, re-authentication</td></tr>
+<tr><td>Race conditions / TOCTOU</td><td>Outcome depends on timing between check and use</td><td>Atomic operations, proper locking</td></tr>
+<tr><td>Integer overflow</td><td>Arithmetic wraps around, often leading to memory errors</td><td>Range checks, safe arithmetic libraries</td></tr>
+<tr><td>Insecure deserialization</td><td>Untrusted serialized objects lead to code execution</td><td>Avoid native deserialization of untrusted data; integrity checks</td></tr>
+<tr><td>Hard-coded credentials</td><td>Secrets in source code</td><td>Secrets managers, scanning</td></tr>
+<tr><td>Improper error handling</td><td>Stack traces revealing internals or failing open</td><td>Generic error messages, fail secure, log details server-side</td></tr>
+<tr><td>Backdoors / maintenance hooks</td><td>Hidden access paths left in code</td><td>Code review, release control</td></tr>
+<tr><td>Covert channels, logic bombs, time-of-check bugs</td><td>Malicious or unintended hidden behavior</td><td>Review, separation of duties in release</td></tr>
+</tbody>
+</table>
+<p>The <strong>CWE Top 25 Most Dangerous Software Weaknesses</strong> (MITRE, updated annually) is a good reference list; out-of-bounds write, XSS and SQL injection consistently rank near the top.</p>
+
+<div class="callout real"><strong>Memory safety:</strong> Microsoft and Google have each reported that roughly 70% of their serious security bugs were memory-safety issues. CISA, NSA and partner agencies urge vendors to publish memory-safety roadmaps and move new code to memory-safe languages such as Rust, Go, Java, C#, and Swift.</div>
+
+<h3>Secure coding practices</h3>
+<ul>
+<li><strong>Input validation</strong>: validate on the server side; prefer allow lists (what is permitted) over deny lists. Client-side validation is for usability only.</li>
+<li><strong>Output encoding</strong> appropriate to the context (HTML, JavaScript, URL, SQL).</li>
+<li><strong>Authentication and session management</strong> using vetted frameworks.</li>
+<li><strong>Least privilege</strong> for the application's own database and OS accounts.</li>
+<li><strong>Cryptography</strong> using proven libraries; never invent algorithms.</li>
+<li><strong>Error handling and logging</strong>: log security events without sensitive data.</li>
+<li><strong>Dependency management</strong>: SCA, pinned versions, SBOMs.</li>
+<li><strong>Code signing</strong> to prove integrity and origin of releases.</li>
+</ul>
+<p>References: OWASP Secure Coding Practices, OWASP ASVS, SEI CERT Coding Standards (C, C++, Java), and language-specific linters.</p>
+
+<h3>API security</h3>
+<p>APIs need authentication (OAuth 2.0 tokens, mTLS, API keys for identification only), authorization at object and function level, input validation, rate limiting, TLS, and logging. Remember the OWASP API Security Top 10 (2023) led by Broken Object Level Authorization. REST is stateless and typically JSON; SOAP uses XML and WS-Security.</p>
+
+<h3>Programming language concepts</h3>
+<ul>
+<li><strong>Compiled</strong> (C, Go) vs <strong>interpreted</strong> (Python, JavaScript) vs <strong>bytecode / virtual machine</strong> (Java, C#). Compiled code hides source but can be reverse-engineered; interpreted code exposes source.</li>
+<li><strong>Object-oriented</strong> concepts: encapsulation (data hiding), inheritance, polymorphism, polyinstantiation. High <strong>cohesion</strong> (module does one thing) and low <strong>coupling</strong> (minimal dependencies) indicate good, more secure design.</li>
+<li>Generations: machine language, assembly, high-level, very high-level (4GL), natural language (5GL).</li>
+<li><strong>Libraries, toolsets and IDEs</strong> are part of the attack surface: malicious IDE extensions and compromised build tools are real supply chain risks.</li>
+</ul>
+
+<h3>Securing the development ecosystem</h3>
+<ul>
+<li><strong>Code repositories</strong>: MFA, least-privilege access, branch protection, mandatory reviews, signed commits, no secrets.</li>
+<li><strong>CI/CD pipelines</strong>: hardened runners, isolated builds, short-lived OIDC credentials, artifact signing and provenance (SLSA).</li>
+<li><strong>Runtime and orchestration</strong>: container image scanning, admission control, runtime protection.</li>
+<li><strong>Software-defined security</strong>: security policy as code, automated and version-controlled.</li>
+<li><strong>Application security testing</strong> integrated into the pipeline: SAST, DAST, IAST, SCA.</li>
+<li><strong>RASP (runtime application self-protection)</strong>: agent within the app that detects and blocks attacks at runtime.</li>
+</ul>
+
+<div class="callout exam"><strong>Domain 8:</strong> "What is the BEST defense against buffer overflows?" Bounds checking and input validation in code (or a memory-safe language); ASLR and DEP are mitigations. "Where must input validation occur?" On the server. High cohesion and low coupling are the desirable combination.</div>
+
+<div class="callout tip">If a question offers both a coding fix and a network control (like a firewall or WAF) for an application flaw, the coding fix is usually the BEST answer because it addresses the root cause.</div>
+`,
+  keyTerms: [
+    ["Buffer overflow", "Writing data beyond a buffer's boundary, corrupting memory"],
+    ["Input validation", "Server-side checking that input conforms to expected format, preferably by allow list"],
+    ["CSRF", "Cross-site request forgery forcing an authenticated user's browser to perform actions"],
+    ["Cohesion and coupling", "Measures of module focus and interdependence; high cohesion and low coupling are preferred"],
+    ["Memory-safe language", "Language that prevents memory errors such as buffer overflows by design"],
+    ["RASP", "Runtime application self-protection embedded in the application"]
+  ],
+  standards: ["CWE Top 25", "OWASP ASVS 5.0", "SEI CERT Coding Standards", "NIST SP 800-218"],
+  labs: ["lab-owasp-web"]
+},
+{
+  id: "p5-d8-l3",
+  module: "p5-d8",
+  title: "Assessing Acquired Software, Databases and Software Effectiveness",
+  minutes: 18,
+  objectives: [
+    "Assess the security of COTS, open source, third-party, managed and cloud software",
+    "Explain database concepts including ACID, views, aggregation and inference",
+    "Assess the effectiveness of software security with audits and risk analysis",
+    "Apply contractual and escrow controls to software acquisition"
+  ],
+  html: `
+<p>Most organizations buy or assemble far more software than they write. Objective 8.4 asks you to assess the security impact of acquired software, and objective 8.3 asks you to assess the effectiveness of software security overall.</p>
+
+<h3>Types of acquired software</h3>
+<table>
+<thead><tr><th>Type</th><th>Risks</th><th>Assessment approaches</th></tr></thead>
+<tbody>
+<tr><td>Commercial off-the-shelf (COTS)</td><td>No source access, vendor's development quality unknown, end-of-support</td><td>Vendor security questionnaires, certifications (Common Criteria, FIPS 140-3), SOC reports, penetration test results, SBOM requests, contract terms</td></tr>
+<tr><td>Open source</td><td>Vulnerabilities in dependencies, abandoned projects, licensing obligations, malicious packages</td><td>SCA, OpenSSF Scorecard, community activity, license review, internal mirrors</td></tr>
+<tr><td>Third-party / custom-developed</td><td>Developer practices unknown, backdoors, IP ownership</td><td>Contractual secure development requirements (SSDF attestation), code review, escrow</td></tr>
+<tr><td>Managed services (enterprise applications)</td><td>Provider access to your data, shared responsibility</td><td>Due diligence, SLAs, right to audit</td></tr>
+<tr><td>Cloud services (SaaS, IaaS, PaaS)</td><td>Configuration and data protection are yours; provider breaches</td><td>SOC 2 Type II, ISO 27001/27017/27018, FedRAMP authorization, CSA STAR registry</td></tr>
+</tbody>
+</table>
+<div class="callout tip"><strong>Software escrow</strong> places the source code with a trusted third party, released to the customer if the vendor goes out of business or fails to support the product. It protects availability of critical custom software.</div>
+
+<h3>Database security concepts</h3>
+<ul>
+<li><strong>Relational databases</strong> use tables (relations); rows are tuples, columns are attributes. The number of rows is <strong>cardinality</strong>; the number of columns is <strong>degree</strong>.</li>
+<li><strong>Keys</strong>: primary key (unique row identifier), foreign key (references a primary key in another table, enforcing referential integrity), candidate keys.</li>
+<li><strong>ACID</strong> transaction properties: <strong>Atomicity</strong> (all or nothing), <strong>Consistency</strong> (database stays valid per rules), <strong>Isolation</strong> (concurrent transactions do not interfere), <strong>Durability</strong> (committed transactions survive failures).</li>
+<li><strong>Concurrency controls</strong>: locking prevents lost updates and dirty reads.</li>
+<li><strong>Views</strong> restrict what users see (content-dependent access control).</li>
+<li><strong>Aggregation</strong>: combining non-sensitive data to produce sensitive information. <strong>Inference</strong>: deducing sensitive information from available data. Defenses include <strong>polyinstantiation</strong> (different versions of a record at different classification levels), cell suppression, partitioning and adding noise.</li>
+<li><strong>NoSQL</strong> databases (document, key-value, graph) often lack mature access controls by default; many data leaks come from exposed NoSQL instances.</li>
+<li><strong>Interfaces</strong>: ODBC, JDBC and ORMs; parameterize queries regardless of interface.</li>
+</ul>
+
+<h3>Assessing software security effectiveness</h3>
+<ul>
+<li><strong>Auditing and logging of changes</strong>: verify that change management is followed for code and configuration.</li>
+<li><strong>Risk analysis and mitigation</strong>: track vulnerabilities by severity and age; measure time to fix; integrate application risk into the enterprise risk register.</li>
+<li><strong>Testing results over time</strong>: trend SAST, DAST and penetration test findings by category to identify systemic problems.</li>
+<li><strong>Maturity assessments</strong> with SAMM or BSIMM.</li>
+<li><strong>Acceptance testing</strong>: before go-live, confirm security requirements are met; formal certification and accreditation where required.</li>
+</ul>
+
+<h3>Contracts and procurement</h3>
+<ul>
+<li>Specify security requirements in RFPs and contracts: secure development practices, vulnerability disclosure and patch timelines, SBOM delivery, breach notification, right to audit, data ownership and return.</li>
+<li>For U.S. federal suppliers, CISA's Secure Software Development Attestation Form, based on the SSDF, is required for software used by agencies.</li>
+<li>Track licenses to avoid legal exposure, and track vendor end-of-support dates.</li>
+</ul>
+
+<div class="callout warn"><strong>Hidden risk:</strong> software acquired through mergers and acquisitions, departmental purchases with a credit card (shadow IT), and browser extensions often bypass procurement review entirely. A software asset inventory and allow-listing controls are needed to catch them.</div>
+
+<div class="callout real"><strong>In practice:</strong> A GRC analyst's vendor review typically includes a questionnaire (such as the SIG or CAIQ), the latest SOC 2 Type II report and bridge letter, penetration test summary, insurance certificates, and the data processing agreement. High-risk vendors get annual reassessment.</div>
+
+<div class="callout exam"><strong>Domain 8:</strong> Know ACID, that polyinstantiation counters inference, that views provide content-dependent access control, and that escrow protects against vendor failure. When assessing COTS where you have no source code, rely on independent evaluations, certifications and contractual assurances.</div>
+`,
+  keyTerms: [
+    ["COTS", "Commercial off-the-shelf software purchased from a vendor"],
+    ["Software escrow", "Third-party custody of source code released if the vendor fails"],
+    ["ACID", "Atomicity, Consistency, Isolation, Durability transaction properties"],
+    ["Polyinstantiation", "Multiple records with the same key at different classification levels to prevent inference"],
+    ["Inference", "Deducing sensitive information from less sensitive available data"],
+    ["Referential integrity", "Every foreign key references a valid primary key"]
+  ],
+  standards: ["NIST SP 800-218", "NIST SP 800-161 Rev 1", "ISO/IEC 27036", "CSA CAIQ"]
+}
+);
