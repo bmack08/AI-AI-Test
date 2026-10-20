@@ -33,7 +33,6 @@ CP.labs.push({
     const esc = ctx.escape;
 
     const DEFAULT = { minLen: 8, maxLen: 16, composition: true, rotation: 60, blocklist: false, hints: false, kba: true, paste: false, mfa: false, rateLimit: true, lockout3: true, truncate: false, showPw: false, unicode: false, storage: "sha1" };
-    const RECOMMENDED = { minLen: 15, maxLen: 64, composition: false, rotation: 0, blocklist: true, hints: false, kba: false, paste: true, mfa: true, rateLimit: true, lockout3: false, truncate: false, showPw: true, unicode: true, storage: "kdf" };
     let pol = Object.assign({}, DEFAULT, ctx.store("policy") || {});
 
     function evaluate(p) {
@@ -170,6 +169,5 @@ CP.labs.push({
 
     load();
     update();
-    void RECOMMENDED;
   }
 });
