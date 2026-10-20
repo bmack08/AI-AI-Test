@@ -3323,3 +3323,342 @@ CP.lessons.push(
   standards: ["NIST SP 800-55 (Measurement Guide)", "ISO/IEC 29147", "ISO/IEC 30111", "RFC 9116"]
 }
 );
+
+/* ===================== p5-d7 Security Operations (13%) ===================== */
+CP.lessons.push(
+{
+  id: "p5-d7-l1",
+  module: "p5-d7",
+  title: "Investigations, Evidence Handling and Digital Forensics",
+  minutes: 20,
+  objectives: [
+    "Describe the investigative process and when to involve law enforcement",
+    "Apply rules of evidence: admissibility, types and the best evidence rule",
+    "Maintain chain of custody and follow the order of volatility",
+    "Explain forensic techniques and eDiscovery"
+  ],
+  html: `
+<p>Domain 7, Security Operations, is <strong>13%</strong> of the exam and the most familiar territory for SOC analysts. It opens with investigations, where careless handling can make evidence worthless in court.</p>
+
+<h3>The investigative process</h3>
+<ol>
+<li><strong>Identify and scope</strong>: what happened, which systems, which type of investigation (administrative, criminal, civil, regulatory).</li>
+<li><strong>Engage stakeholders</strong>: management, legal counsel, HR, and, when appropriate, law enforcement. Calling law enforcement is a <em>management and legal</em> decision: it may bring expertise and legal powers, but it can mean loss of control, publicity, and seizure of systems.</li>
+<li><strong>Preserve and collect evidence</strong> with documented procedures.</li>
+<li><strong>Examine and analyze</strong>, working on forensic copies, never the original.</li>
+<li><strong>Report</strong> findings factually and preserve the documentation.</li>
+</ol>
+<p>Search warrants, subpoenas and voluntary surrender are ways evidence is obtained. Employees' expectation of privacy is reduced by clear policies and login banners, which is why acceptable use policies and banners matter legally.</p>
+
+<h3>Rules of evidence</h3>
+<p>To be admissible, evidence must be <strong>relevant</strong> (relates to the case), <strong>material</strong> (related to an important fact), and <strong>competent</strong> (obtained legally and reliably). Evidence should also be authentic, accurate, complete and convincing.</p>
+<table>
+<thead><tr><th>Evidence type</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td>Real (object) evidence</td><td>Physical items: a hard drive, a USB stick</td></tr>
+<tr><td>Documentary evidence</td><td>Written items including logs and computer records; must be authenticated</td></tr>
+<tr><td>Testimonial evidence</td><td>Witness statements; expert witnesses may give opinions</td></tr>
+<tr><td>Demonstrative evidence</td><td>Charts and diagrams that help explain other evidence</td></tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Best evidence rule</strong>: the original document is preferred over copies. For digital evidence, verified forensic copies are generally accepted.</li>
+<li><strong>Parol evidence rule</strong>: a written agreement is assumed to contain all terms; verbal agreements do not modify it.</li>
+<li><strong>Hearsay</strong>: second-hand statements are generally inadmissible; business records created in the regular course of business (like logs) can qualify for an exception.</li>
+<li>Other classifications: direct, circumstantial, corroborative, and secondary evidence.</li>
+</ul>
+
+<h3>Chain of custody</h3>
+<p>A chain of custody documents who collected, handled, transferred, and stored each item, when, where and why. A gap lets the opposing side argue tampering. Use tamper-evident bags, evidence logs, unique identifiers, and secure storage.</p>
+
+<h3>Collection and the order of volatility</h3>
+<p>Collect the most volatile data first (RFC 3227):</p>
+<ol>
+<li>CPU registers and cache</li>
+<li>Routing tables, ARP cache, process table, kernel statistics, memory (RAM)</li>
+<li>Temporary file systems</li>
+<li>Disk</li>
+<li>Remote logging and monitoring data</li>
+<li>Physical configuration and network topology</li>
+<li>Archival media and backups</li>
+</ol>
+<div class="callout warn">Do not pull the plug or reboot a compromised system without thinking: RAM may contain encryption keys, injected code, and network connections that vanish on power-off. Isolate it from the network instead (EDR network containment), then capture memory.</div>
+
+<h3>Forensic techniques</h3>
+<ul>
+<li><strong>Imaging</strong>: bit-for-bit copy using a <strong>write blocker</strong>; verify with hashes (SHA-256) of original and image.</li>
+<li><strong>Memory analysis</strong>: tools like Volatility find processes, injected code and network sockets.</li>
+<li><strong>Timeline analysis</strong>: correlate file system timestamps (MAC times), logs and artifacts.</li>
+<li><strong>Network forensics</strong>: packet captures and flow data.</li>
+<li><strong>Artifacts</strong>: registry, prefetch, event logs, browser history, cloud audit logs.</li>
+<li><strong>Locard's exchange principle</strong>: every contact leaves a trace; the attacker leaves something and takes something.</li>
+</ul>
+
+<h3>eDiscovery</h3>
+<p>Electronic discovery is the process of identifying, preserving, collecting, processing, reviewing and producing electronically stored information for litigation. The <strong>Electronic Discovery Reference Model (EDRM)</strong> describes the stages: information governance, identification, preservation, collection, processing, review, analysis, production, presentation. A <strong>legal hold</strong> triggers preservation.</p>
+
+<h3>Investigative techniques and roles</h3>
+<p>Interviews (informal, gather information) vs interrogations (adversarial, typically law enforcement). Analysts should stick to facts, avoid speculation in reports, and never conduct an interrogation without HR and legal involvement.</p>
+
+<div class="callout exam"><strong>Domain 7:</strong> Know relevant, material, competent; the best evidence rule; the order of volatility; and that analysis is done on a verified copy. Hashing proves integrity of evidence. Chain of custody must be continuous. Remember also the "5 rules of evidence" in some texts: authentic, accurate, complete, convincing, admissible.</div>
+
+<div class="callout real"><strong>In practice:</strong> Even for internal HR investigations, document as if the case will end up in court. Many do. Record exact commands run, hashes, timestamps with time zones (use UTC), and every hand-off.</div>
+`,
+  keyTerms: [
+    ["Chain of custody", "Documentation of who handled evidence, when and how, from collection to court"],
+    ["Order of volatility", "Collecting the most short-lived evidence (e.g. memory) before persistent data"],
+    ["Best evidence rule", "Original evidence is preferred over copies"],
+    ["Write blocker", "Device preventing writes to evidence media during imaging"],
+    ["Admissible evidence", "Evidence that is relevant, material and competent"],
+    ["eDiscovery", "Process of preserving and producing electronic information for legal proceedings"]
+  ],
+  standards: ["RFC 3227", "NIST SP 800-86", "ISO/IEC 27037", "ISO/IEC 27043", "EDRM"]
+},
+{
+  id: "p5-d7-l2",
+  module: "p5-d7",
+  title: "Foundational Operations: Change, Configuration and Patch Management",
+  minutes: 18,
+  objectives: [
+    "Apply operational security concepts: need to know, SoD, job rotation, SLAs",
+    "Describe the change management process and its role in security",
+    "Maintain secure baselines with configuration management",
+    "Run a risk-based patch and vulnerability management program"
+  ],
+  html: `
+<p>Most breaches exploit known weaknesses: an unpatched system, an unauthorized change, a drifted configuration. Disciplined operations close those gaps. Expect several exam questions where the BEST answer is "follow the change management process."</p>
+
+<h3>Foundational security operations concepts</h3>
+<ul>
+<li><strong>Need to know and least privilege</strong>: covered in Domain 5; operations enforces them daily.</li>
+<li><strong>Separation of duties and responsibilities</strong>: developers should not deploy their own code to production unreviewed; the person requesting a change should not approve it.</li>
+<li><strong>Privileged account management</strong>: monitor and limit admin rights.</li>
+<li><strong>Job rotation</strong> and <strong>mandatory vacations</strong>: detect fraud and reduce single points of knowledge.</li>
+<li><strong>Service level agreements (SLAs)</strong>: define availability and response commitments with providers and internal customers; operational level agreements (OLAs) support them internally.</li>
+<li><strong>Resource protection</strong>: protecting media, hardware and backups throughout their lifecycle.</li>
+</ul>
+
+<h3>Change management</h3>
+<p>Change management ensures changes are requested, reviewed, approved, tested, implemented, and documented, so that changes do not reduce security or availability.</p>
+<ol>
+<li><strong>Request</strong>: describe the change, reason, affected systems.</li>
+<li><strong>Review and impact analysis</strong>: security, risk, dependencies, rollback plan.</li>
+<li><strong>Approve or reject</strong>: a Change Advisory Board (CAB) for significant changes.</li>
+<li><strong>Test</strong>: in a non-production environment.</li>
+<li><strong>Schedule and implement</strong>: in a maintenance window, communicating to stakeholders.</li>
+<li><strong>Document and verify</strong>: update records and the CMDB; confirm success or roll back.</li>
+</ol>
+<p>Change types: <strong>standard</strong> (pre-approved, low risk, routine), <strong>normal</strong> (requires review), and <strong>emergency</strong> (implemented quickly to address an urgent issue, documented and reviewed afterward). Emergency changes still require documentation.</p>
+
+<div class="callout tip">From a SOC perspective, change management records are gold: an unexpected new admin account or firewall rule with no matching change ticket is suspicious. Integrating the change calendar into alert triage cuts false positives.</div>
+
+<h3>Configuration management</h3>
+<ul>
+<li><strong>Baselines</strong>: documented secure configurations (CIS Benchmarks, DISA STIGs, vendor baselines).</li>
+<li><strong>Provisioning</strong> systems from approved images or Infrastructure as Code to make builds consistent.</li>
+<li><strong>Configuration Management Database (CMDB)</strong>: records configuration items (CIs) and their relationships.</li>
+<li><strong>Drift detection</strong>: compare running configurations to the baseline and remediate.</li>
+<li><strong>Automation</strong>: tools like Ansible, Group Policy, Intune, and Desired State Configuration enforce settings at scale.</li>
+</ul>
+
+<h3>Patch and vulnerability management</h3>
+<ol>
+<li><strong>Inventory</strong>: you cannot patch what you do not know.</li>
+<li><strong>Identify</strong> available patches and vulnerabilities through vendor bulletins (Microsoft Patch Tuesday, the second Tuesday of each month) and scanning.</li>
+<li><strong>Prioritize</strong> by risk: CVSS severity, exploitation status (CISA KEV), EPSS likelihood, and asset exposure and criticality.</li>
+<li><strong>Test</strong> patches on representative systems.</li>
+<li><strong>Deploy</strong> via change management, in rings or waves.</li>
+<li><strong>Verify</strong> installation through rescanning and reporting.</li>
+</ol>
+<table>
+<thead><tr><th>Example patch SLA</th><th>Target</th></tr></thead>
+<tbody>
+<tr><td>Actively exploited (KEV) on internet-facing systems</td><td>Days, often 48-72 hours</td></tr>
+<tr><td>Critical</td><td>15 days</td></tr>
+<tr><td>High</td><td>30 days</td></tr>
+<tr><td>Medium and low</td><td>60-90 days or next cycle</td></tr>
+</tbody>
+</table>
+<p>U.S. federal agencies must remediate KEV entries by the deadlines in CISA Binding Operational Directive 22-01. When a patch is not available or cannot be applied, use <strong>compensating controls</strong>: segmentation, WAF virtual patching, disabling the vulnerable feature, or increased monitoring.</p>
+
+<div class="callout warn">Zero-day vulnerabilities have no patch yet. Defense relies on layered controls, rapid detection, and vendor mitigations. Patching speed after disclosure matters greatly: exploitation of edge devices often begins within days of a patch release, as attackers reverse-engineer the fix.</div>
+
+<div class="callout exam"><strong>Domain 7:</strong> "An administrator wants to apply an urgent patch to a production server. What should they do FIRST?" Follow the change management process (an emergency change if needed), including testing and a rollback plan. Unauthorized changes, even well-intentioned ones, are a security violation.</div>
+
+<div class="callout real"><strong>In practice:</strong> Many outages are self-inflicted: a faulty update pushed to every machine at once. The July 2024 CrowdStrike content update incident, which crashed millions of Windows systems, reinforced the value of staged rollouts, canary groups and rollback plans, even for security software.</div>
+`,
+  keyTerms: [
+    ["Change management", "Process for requesting, reviewing, approving, testing and documenting changes"],
+    ["CAB", "Change Advisory Board that evaluates and approves significant changes"],
+    ["Emergency change", "Urgent change implemented quickly and reviewed after the fact"],
+    ["Configuration baseline", "Approved secure configuration against which systems are measured"],
+    ["CMDB", "Configuration Management Database recording configuration items and relationships"],
+    ["Compensating control", "Alternative control used when the primary control cannot be applied"]
+  ],
+  standards: ["NIST SP 800-128", "NIST SP 800-40 Rev 4", "ITIL 4", "CISA BOD 22-01"]
+},
+{
+  id: "p5-d7-l3",
+  module: "p5-d7",
+  title: "Incident Management and Detective and Preventive Measures",
+  minutes: 18,
+  objectives: [
+    "Follow the CISSP incident management steps",
+    "Map incident response to NIST SP 800-61 Rev 3 and CSF 2.0",
+    "Select detective and preventive controls: SIEM, SOAR, UEBA, sandboxing, honeypots",
+    "Manage logging and continuous monitoring"
+  ],
+  html: `
+<p>Incident management is where SOC skills meet the CISSP. The exam uses its own step list, so know it alongside the NIST model you learned in Phase 3.</p>
+
+<h3>CISSP incident management steps</h3>
+<p>The ISC2 outline lists: <strong>Detection, Response, Mitigation, Reporting, Recovery, Remediation, Lessons Learned</strong>.</p>
+<table>
+<thead><tr><th>Step</th><th>Activities</th></tr></thead>
+<tbody>
+<tr><td>Detection</td><td>Alerts from IDS, SIEM, EDR, users; triage to confirm an incident (an event vs an incident)</td></tr>
+<tr><td>Response</td><td>Activate the incident response team (CSIRT); begin investigation; preserve evidence</td></tr>
+<tr><td>Mitigation</td><td><strong>Containment</strong>: limit the damage, isolate affected systems</td></tr>
+<tr><td>Reporting</td><td>Notify management, and legal, regulators, customers and law enforcement as required</td></tr>
+<tr><td>Recovery</td><td>Restore systems to normal operation, monitor for reinfection</td></tr>
+<tr><td>Remediation</td><td>Root cause analysis; fix the underlying vulnerability so it cannot recur</td></tr>
+<tr><td>Lessons learned</td><td>Post-incident review; update plans, detections and training</td></tr>
+</tbody>
+</table>
+
+<h3>Mapping to NIST</h3>
+<p>NIST SP 800-61 Revision 3 (April 2025) replaced the classic four-phase lifecycle (Preparation; Detection and Analysis; Containment, Eradication and Recovery; Post-Incident Activity) with guidance organized around the <strong>CSF 2.0 functions</strong>: Govern, Identify and Protect support preparation, Detect, Respond and Recover handle the incident, and improvement feeds back through all of them. The concepts are the same; the framing integrates incident response into overall risk management.</p>
+
+<div class="callout exam"><strong>Domain 7:</strong> The FIRST priority after confirming an incident is usually <strong>containment</strong> to limit damage, but human safety always comes first. Do not confuse remediation (fix root cause) with recovery (restore operations). Lessons learned is the step most often skipped in real life and the most valuable for improvement.</div>
+
+<h3>Detective and preventive measures</h3>
+<table>
+<thead><tr><th>Control</th><th>Function</th></tr></thead>
+<tbody>
+<tr><td>Firewalls (NGFW, WAF)</td><td>Preventive: block unauthorized traffic</td></tr>
+<tr><td>IDS / IPS</td><td>Detective / preventive at the network or host</td></tr>
+<tr><td>Allow lists and deny lists</td><td>Application allow listing is one of the strongest preventive controls against malware</td></tr>
+<tr><td>Anti-malware and EDR / XDR</td><td>Detect and block malicious behavior; isolate hosts</td></tr>
+<tr><td>Sandboxing</td><td>Detonate suspicious files in isolation to observe behavior</td></tr>
+<tr><td>Honeypots, honeynets, honeytokens</td><td>Detective decoys; any interaction is suspicious, so false positives are low</td></tr>
+<tr><td>Third-party security services</td><td>MSSP, MDR, managed DDoS protection</td></tr>
+<tr><td>Machine learning and AI-based tools</td><td>Anomaly detection, alert triage assistance; require tuning and human oversight</td></tr>
+</tbody>
+</table>
+
+<h3>Logging and monitoring</h3>
+<ul>
+<li><strong>SIEM</strong>: collects, normalizes, correlates and alerts on logs; supports retention and investigation.</li>
+<li><strong>SOAR</strong>: security orchestration, automation and response; executes playbooks such as enriching an IOC and disabling an account.</li>
+<li><strong>UEBA</strong>: user and entity behavior analytics; baselines normal behavior and flags anomalies like a user downloading 10 times their usual volume.</li>
+<li><strong>Continuous monitoring</strong>: ongoing awareness of security posture (NIST SP 800-137).</li>
+<li><strong>Egress monitoring</strong>: watch outbound traffic for data exfiltration, DLP, and steganography or covert channels.</li>
+<li><strong>Threat intelligence</strong> feeds and <strong>threat hunting</strong>: proactively search for attackers who evaded automated detection.</li>
+<li><strong>Log management essentials</strong>: synchronize time (NTP), protect log integrity (write-once storage, hashing, separate log accounts), define retention, and regularly review.</li>
+</ul>
+
+<div class="callout warn"><strong>Clipping levels</strong> set thresholds so that only activity above a baseline triggers alerts (for example, five failed logins in 10 minutes). They reduce noise but can be gamed by attackers who stay "low and slow." Tune thresholds with data, not guesses.</div>
+
+<div class="callout real"><strong>In practice:</strong> A healthy SOC measures itself: dwell time, MTTD, MTTR, and the percentage of incidents first detected internally versus reported by a third party. Being told by the FBI or a customer that you are breached means your detective controls failed.</div>
+
+<div class="callout tip">Exam vocabulary: an <strong>event</strong> is any observable occurrence; an <strong>adverse event</strong> has negative consequences; an <strong>incident</strong> violates or threatens security policy. Not every event is an incident.</div>
+`,
+  keyTerms: [
+    ["Incident", "An event that actually or potentially jeopardizes CIA or violates security policy"],
+    ["Containment", "Limiting the scope and impact of an incident"],
+    ["Remediation", "Addressing the root cause so an incident cannot recur"],
+    ["SOAR", "Security orchestration, automation and response platform executing playbooks"],
+    ["UEBA", "User and entity behavior analytics detecting anomalies against baselines"],
+    ["Clipping level", "Threshold above which activity generates an alert"]
+  ],
+  standards: ["NIST SP 800-61 Rev 3", "NIST SP 800-137", "NIST SP 800-92", "ISO/IEC 27035"],
+  labs: ["lab-ir-tabletop"]
+},
+{
+  id: "p5-d7-l4",
+  module: "p5-d7",
+  title: "Disaster Recovery: Recovery Sites, Backup Strategies and Plan Testing",
+  minutes: 20,
+  objectives: [
+    "Compare hot, warm, cold, mobile, reciprocal and cloud recovery sites",
+    "Choose among full, incremental and differential backups and calculate restores",
+    "Apply resilience strategies such as RAID, clustering and replication",
+    "Select the right DR test type and address personnel safety"
+  ],
+  html: `
+<p>Disaster recovery (DR) is the technical counterpart of the BCP from Domain 1. It restores IT systems within the RTO and RPO set by the business impact analysis.</p>
+
+<h3>Recovery site strategies</h3>
+<table>
+<thead><tr><th>Site</th><th>Description</th><th>Recovery time</th><th>Cost</th></tr></thead>
+<tbody>
+<tr><td>Hot site</td><td>Fully equipped, with current data replicated; can take over almost immediately</td><td>Minutes to hours</td><td>Highest</td></tr>
+<tr><td>Warm site</td><td>Equipment and connectivity in place, but data and software must be loaded or brought current</td><td>Hours to days</td><td>Medium</td></tr>
+<tr><td>Cold site</td><td>Space with power, HVAC and connectivity but no equipment</td><td>Weeks</td><td>Lowest</td></tr>
+<tr><td>Mobile site</td><td>Self-contained trailers or containers deployable to a location</td><td>Varies</td><td>Medium to high</td></tr>
+<tr><td>Redundant (mirrored) site</td><td>Fully operational duplicate processing live, active-active</td><td>Near zero</td><td>Very high</td></tr>
+<tr><td>Reciprocal agreement</td><td>Two organizations agree to host each other in a disaster</td><td>Uncertain</td><td>Low, but hard to enforce; both may be hit by the same disaster</td></tr>
+<tr><td>Cloud DR (DRaaS)</td><td>Replicate to cloud and spin up on demand; pay mainly when used</td><td>Minutes to hours</td><td>Flexible</td></tr>
+</tbody>
+</table>
+<p>Choose the site so its recovery time fits the RTO. Recovery sites should be far enough away not to be affected by the same regional disaster, but accessible to staff.</p>
+
+<h3>Backup strategies</h3>
+<table>
+<thead><tr><th>Type</th><th>What it copies</th><th>Archive bit</th><th>Backup speed</th><th>Restore</th></tr></thead>
+<tbody>
+<tr><td>Full</td><td>Everything</td><td>Cleared</td><td>Slowest</td><td>Fastest: one set</td></tr>
+<tr><td>Incremental</td><td>Changes since the last backup of any kind</td><td>Cleared</td><td>Fastest</td><td>Slowest: last full plus <em>every</em> incremental since</td></tr>
+<tr><td>Differential</td><td>Changes since the last full backup</td><td>Not cleared</td><td>Grows each day</td><td>Last full plus the <em>latest</em> differential only</td></tr>
+</tbody>
+</table>
+<h4>Worked example</h4>
+<p>Full backup on Sunday, daily backups Monday to Friday. Failure occurs Thursday afternoon.</p>
+<ul>
+<li>With incrementals: restore Sunday full, then Monday, Tuesday, Wednesday and Thursday incrementals (5 sets).</li>
+<li>With differentials: restore Sunday full plus Thursday's differential (2 sets).</li>
+</ul>
+<p>Other approaches: <strong>snapshots</strong>, <strong>continuous data protection</strong> (near-zero RPO), <strong>electronic vaulting</strong> (batch transfer of backups to an offsite location), <strong>remote journaling</strong> (sending transaction logs offsite frequently), and <strong>database shadowing</strong> (replicating to multiple remote databases).</p>
+
+<div class="callout warn"><strong>Ransomware-resilient backups:</strong> follow the <strong>3-2-1-1-0</strong> rule: 3 copies of data, on 2 different media types, 1 offsite, 1 offline or immutable (air-gapped or object-lock), and 0 errors on restore verification. Protect backup consoles with separate credentials and MFA; attackers routinely target them first.</div>
+
+<h3>Resilience and fault tolerance</h3>
+<ul>
+<li><strong>RAID</strong>: RAID 0 (striping, no redundancy), RAID 1 (mirroring), RAID 5 (striping with parity, survives one disk failure), RAID 6 (dual parity, survives two), RAID 10 (mirrored stripes). RAID is not a backup: it does not protect against deletion or encryption.</li>
+<li><strong>Clustering</strong> and <strong>load balancing</strong>: active-active or active-passive failover.</li>
+<li><strong>Replication</strong>: synchronous (no data loss, distance-limited, higher latency) vs asynchronous (some data loss possible, long distances).</li>
+<li><strong>Power</strong>: UPS, generators; <strong>network</strong>: diverse carriers and paths.</li>
+<li><strong>Single points of failure</strong>: eliminate them where the BIA justifies the cost; include people (key-person dependency).</li>
+</ul>
+
+<h3>Testing the DR plan</h3>
+<table>
+<thead><tr><th>Test</th><th>Description</th><th>Disruption</th></tr></thead>
+<tbody>
+<tr><td>Checklist (read-through)</td><td>Distribute the plan for review</td><td>None</td></tr>
+<tr><td>Structured walk-through (tabletop)</td><td>Team talks through a scenario step by step</td><td>None</td></tr>
+<tr><td>Simulation</td><td>Act out a scenario, possibly with some systems, without affecting production</td><td>Low</td></tr>
+<tr><td>Parallel</td><td>Bring up the recovery site and process in parallel while production continues</td><td>Low to moderate</td></tr>
+<tr><td>Full interruption (full-scale)</td><td>Shut down primary operations and fail over</td><td>High: the most realistic and most risky; requires senior management approval</td></tr>
+</tbody>
+</table>
+<p>Plans must be maintained and tested at least annually and after significant changes. Communicate roles, keep contact trees current, and train staff.</p>
+
+<h3>Personnel safety and security</h3>
+<p>Domain 7 also covers <strong>travel security</strong> (loaner laptops for high-risk countries, VPN use), <strong>security training and awareness</strong>, <strong>emergency management</strong> (evacuation, shelter-in-place, crisis communication), and <strong>duress</strong> (duress codes or silent alarms so staff can signal coercion). Safety of people always comes before assets.</p>
+
+<div class="callout exam"><strong>Domain 7:</strong> Expect calculation-style questions on incremental vs differential restores, the order of DR tests by disruption, and which site meets a given RTO at the lowest cost. A full interruption test should never be the first test performed.</div>
+
+<div class="callout real"><strong>In practice:</strong> After major ransomware incidents, the most common lesson is "our backups existed but restoring them took weeks." Time your restore tests and compare them with RTOs; that measurement is what turns a backup program into a DR capability.</div>
+`,
+  keyTerms: [
+    ["Hot site", "Fully equipped recovery site with current data, ready almost immediately"],
+    ["Cold site", "Recovery site with facilities but no equipment; slowest and cheapest"],
+    ["Incremental backup", "Copies changes since the last backup and clears the archive bit"],
+    ["Differential backup", "Copies changes since the last full backup without clearing the archive bit"],
+    ["Full interruption test", "DR test that shuts down primary operations to fail over"],
+    ["3-2-1-1-0 rule", "Backup strategy with copies, media diversity, offsite, immutable copy and verified restores"]
+  ],
+  standards: ["NIST SP 800-34 Rev 1", "ISO 22301:2019", "ISO/IEC 27031"]
+}
+);
