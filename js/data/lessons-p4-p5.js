@@ -3905,3 +3905,262 @@ CP.lessons.push(
   standards: ["NIST SP 800-218", "NIST SP 800-161 Rev 1", "ISO/IEC 27036", "CSA CAIQ"]
 }
 );
+
+/* ===================== p5-m9 Exam Strategy & the Associate Path ===================== */
+CP.lessons.push(
+{
+  id: "p5-m9-l1",
+  module: "p5-m9",
+  title: "The CISSP CAT Exam and Thinking Like a Manager",
+  minutes: 20,
+  objectives: [
+    "Describe the CISSP CAT format, timing, passing score and retake policy",
+    "Apply the 'think like a manager' mindset to scenario questions",
+    "Decode BEST, FIRST, MOST and LEAST questions",
+    "Use an elimination strategy when every option looks correct"
+  ],
+  html: `
+<p>Many technically strong candidates fail the CISSP not because they lack knowledge, but because they answer as engineers instead of as security leaders. This lesson covers the format and the mindset.</p>
+
+<h3>Exam format (English CAT)</h3>
+<table>
+<thead><tr><th>Item</th><th>Detail</th></tr></thead>
+<tbody>
+<tr><td>Format</td><td>Computerized Adaptive Testing (CAT) at Pearson VUE test centers</td></tr>
+<tr><td>Questions</td><td>100 to 150 items, including 25 unscored pretest items you cannot identify</td></tr>
+<tr><td>Time</td><td>3 hours maximum</td></tr>
+<tr><td>Passing standard</td><td>700 out of 1000 scaled score</td></tr>
+<tr><td>Question types</td><td>Multiple choice and advanced innovative items (drag-and-drop, hotspot)</td></tr>
+<tr><td>Navigation</td><td>One question at a time; <strong>you cannot skip, go back or change answers</strong></td></tr>
+<tr><td>Domain weights (outline effective April 15, 2024)</td><td>D1 16%, D2 10%, D3 13%, D4 13%, D5 13%, D6 12%, D7 13%, D8 10%</td></tr>
+</tbody>
+</table>
+<p>The CAT engine adjusts difficulty to your ability. Answer correctly and the next question tends to be harder; the exam ends once the algorithm is statistically confident you are above or below the passing standard, or when you hit the maximum items or time. Finishing at 100 questions can mean a pass or a fail, so do not read anything into it. Running out of time before reaching the minimum number of items results in a fail, so pace yourself: about 1 minute 10 seconds per question leaves a buffer.</p>
+<p>Exams in some other languages are delivered in a linear (fixed-form) format with more items and more time; check the ISC2 site for your language. If you fail, ISC2 retake rules require waiting periods (30 days after the first attempt, 60 after the second, 90 after the third) with a maximum of four attempts in 12 months. Always verify current pricing and policies at isc2.org; ISC2 refreshes the outline periodically.</p>
+
+<div class="callout warn">Because difficulty adapts, questions will feel hard throughout. That is a normal sign the engine is probing near your ability level, not a sign you are failing. Stay calm, and do not dwell on any single item.</div>
+
+<h3>Think like a manager</h3>
+<p>The CISSP is a management-level certification. The "right" answer reflects how an experienced security leader advising the business would act:</p>
+<ul>
+<li><strong>Human safety comes first</strong>, always.</li>
+<li><strong>Security supports the business</strong> mission; it does not dictate it. The answer that enables business objectives with acceptable risk beats the most secure but impractical option.</li>
+<li><strong>Senior management owns risk</strong> decisions. Your role is to inform, advise, and implement, not to unilaterally act or accept risk.</li>
+<li><strong>Policy and process before technology.</strong> Governance, risk assessment and policy usually come before buying a tool.</li>
+<li><strong>Follow the process</strong>: change management, incident response plan, chain of custody, even under pressure.</li>
+<li><strong>Address root cause</strong> over symptoms.</li>
+<li><strong>Be ethical</strong>: the Code of Ethics canons in order.</li>
+<li><strong>Do not fix it yourself</strong>: you are rarely the one typing commands. Answers like "reboot the server" or "reconfigure the firewall immediately" are often distractors.</li>
+</ul>
+
+<h3>Reading the question</h3>
+<table>
+<thead><tr><th>Keyword</th><th>What it means</th><th>Strategy</th></tr></thead>
+<tbody>
+<tr><td>BEST</td><td>Several answers are correct; pick the most complete or most effective</td><td>Prefer the answer that addresses root cause, covers more risk, or is most aligned to business goals</td></tr>
+<tr><td>FIRST</td><td>Order of operations</td><td>Usually assess, understand, or plan before acting; in incidents, contain and protect life; in BCP, get management support</td></tr>
+<tr><td>MOST (important, likely, effective)</td><td>Ranking</td><td>Look for the option with the greatest impact on risk</td></tr>
+<tr><td>LEAST / NOT / EXCEPT</td><td>Inverted question</td><td>Restate it to yourself: "Which one is wrong?"</td></tr>
+<tr><td>PRIMARY, ULTIMATE</td><td>Fundamental purpose or accountable party</td><td>"Ultimately responsible" is senior management</td></tr>
+</tbody>
+</table>
+
+<h3>Elimination technique</h3>
+<ol>
+<li>Read the last sentence first to know what is being asked, then read the scenario.</li>
+<li>Identify the role you are playing (CISO, consultant, analyst) and the organization's goal.</li>
+<li>Eliminate answers that are technically wrong, unethical, illegal or outside your authority.</li>
+<li>Of the remaining, choose the one that is broader, more strategic, or comes earlier in the process.</li>
+<li>Watch for absolutes ("always," "never") in distractors, and for answers that are true but do not answer the question asked.</li>
+</ol>
+
+<h4>Example</h4>
+<p><em>A security manager discovers that a critical web application has a severe vulnerability. A patch is available. What should the manager do FIRST?</em></p>
+<ul>
+<li>A. Apply the patch immediately to production.</li>
+<li>B. Shut down the application until it can be patched.</li>
+<li>C. Assess the risk and initiate the change management process for testing and deploying the patch.</li>
+<li>D. Notify customers of the vulnerability.</li>
+</ul>
+<p><strong>C</strong> is best. A bypasses change management; B may be disproportionate without assessing risk and is a business decision; D is premature. C follows process and informs the decision, while still moving quickly (an emergency change if risk is high).</p>
+
+<div class="callout exam"><strong>All domains:</strong> When two answers both seem right, ask "which one would a CISO recommend to the board?" Usually it is the one about policy, risk assessment, or governance, rather than a specific technical setting.</div>
+
+<div class="callout tip">On exam day, use the scheduled breaks sparingly (the clock keeps running), eat beforehand, and arrive early with your ID. Your result is typically shown as a provisional pass or fail on a printout after you leave the testing room.</div>
+`,
+  keyTerms: [
+    ["CAT", "Computerized Adaptive Testing that adjusts question difficulty to the candidate"],
+    ["Pretest items", "Unscored questions included for future exam development"],
+    ["Think like a manager", "Choosing answers that reflect business-aligned, risk-based, process-driven leadership"],
+    ["BEST question", "Question with multiple correct answers where the most complete must be chosen"],
+    ["FIRST question", "Question testing order of operations"]
+  ],
+  standards: ["ISC2 CISSP Exam Outline (effective April 15, 2024)"]
+},
+{
+  id: "p5-m9-l2",
+  module: "p5-m9",
+  title: "Experience, Endorsement, the Associate of ISC2 Path and CPEs",
+  minutes: 16,
+  objectives: [
+    "State the CISSP experience requirement and available waiver",
+    "Describe the endorsement process and its timeline",
+    "Explain how the Associate of ISC2 path works for career changers",
+    "Plan for CPE credits and annual maintenance fees"
+  ],
+  html: `
+<p>Passing the exam is not the same as being certified. ISC2 requires verified professional experience and endorsement. For readers of this course, who are often early in their careers, the Associate of ISC2 path is the key option.</p>
+
+<h3>The experience requirement</h3>
+<ul>
+<li>A minimum of <strong>five years</strong> of cumulative, paid work experience in <strong>two or more</strong> of the eight CISSP domains.</li>
+<li>A <strong>one-year waiver</strong> is available for a four-year college degree (or regional equivalent), or for an additional credential from the ISC2-approved list (for example, Security+ and CySA+ have appeared on that list; check the current list). Only one year can be waived in total, regardless of how many degrees or certs you hold.</li>
+<li><strong>Part-time</strong> work counts: at least 20 hours per week, with 1,040 hours equal to six months and 2,080 hours equal to one year.</li>
+<li><strong>Internships</strong>, paid or unpaid, can count with documentation on company letterhead.</li>
+</ul>
+<table>
+<thead><tr><th>Example role</th><th>Domains it typically maps to</th></tr></thead>
+<tbody>
+<tr><td>SOC analyst</td><td>D7 Security Operations, D6 Assessment and Testing, often D4 and D5</td></tr>
+<tr><td>Vulnerability management analyst</td><td>D6, D7, D1</td></tr>
+<tr><td>GRC analyst</td><td>D1, D2, D6</td></tr>
+<tr><td>IAM administrator</td><td>D5, D7</td></tr>
+<tr><td>Network security engineer</td><td>D4, D3, D7</td></tr>
+<tr><td>Application security engineer</td><td>D8, D6, D3</td></tr>
+</tbody>
+</table>
+<div class="callout tip">Keep a running record of your roles, dates, hours, managers' contact details and the security tasks you performed, mapped to domains. Writing this up years later from memory is painful.</div>
+
+<h3>Endorsement</h3>
+<ol>
+<li>Pass the exam.</li>
+<li>Complete the online endorsement application within <strong>nine months</strong> of the exam date.</li>
+<li>Have the application <strong>endorsed by an active ISC2 credential holder</strong> in good standing who can attest to your professional experience. If you do not know one, <strong>ISC2 can act as your endorser</strong>.</li>
+<li>Agree to the ISC2 Code of Ethics and pay the first Annual Maintenance Fee (AMF).</li>
+<li>ISC2 may randomly audit applications and request verification of experience.</li>
+</ol>
+
+<h3>The Associate of ISC2 path</h3>
+<p>If you pass the CISSP exam but do not yet have the required experience, you can become an <strong>Associate of ISC2</strong>.</p>
+<ul>
+<li>You have <strong>six years</strong> from the date ISC2 notifies you of your Associate status to earn the required five years of experience (or four years with a waiver).</li>
+<li>As an Associate, you agree to the Code of Ethics, pay a reduced AMF, and earn CPE credits annually (ISC2 has set the Associate requirement at 15 CPEs per year; confirm current figures).</li>
+<li>Once you have the experience, you submit the endorsement application and convert to full CISSP.</li>
+<li>Your title in the meantime is "Associate of ISC2" (not "CISSP"); listing the exam pass correctly matters for ethics.</li>
+</ul>
+<div class="callout real"><strong>Why this matters for career changers:</strong> Passing the CISSP exam as an Associate signals serious, broad knowledge to hiring managers, even for entry-level roles. Combined with Security+ and a SOC certification, it makes a resume stand out. The experience you gain in your first SOC job then counts toward converting to full CISSP.</div>
+
+<h3>Maintaining the CISSP</h3>
+<table>
+<thead><tr><th>Requirement</th><th>CISSP</th></tr></thead>
+<tbody>
+<tr><td>Certification cycle</td><td>Three years</td></tr>
+<tr><td>CPE credits</td><td>120 per three-year cycle, with a minimum of 40 earned each year</td></tr>
+<tr><td>Annual Maintenance Fee</td><td>Paid each year (US$135 for CISSP at the time of writing; Associates pay less)</td></tr>
+<tr><td>Ethics</td><td>Continued adherence to the Code of Ethics</td></tr>
+</tbody>
+</table>
+<p>CPEs are categorized: <strong>Group A</strong> credits relate directly to the CISSP domains (courses, conferences, webinars, writing, teaching, volunteering for ISC2); <strong>Group B</strong> covers general professional development such as leadership or communication skills, with a cap on how many count. Typically one CPE equals one hour of qualifying activity. Record CPEs in the ISC2 portal with evidence, since audits happen.</p>
+
+<h3>Concentrations and next steps</h3>
+<p>After CISSP, ISC2 offers concentrations: <strong>CISSP-ISSAP</strong> (architecture), <strong>CISSP-ISSEP</strong> (engineering), and <strong>CISSP-ISSMP</strong> (management). Other ISC2 certifications include CCSP (cloud), CSSLP (secure software), SSCP and CGRC.</p>
+
+<div class="callout warn">Never claim "CISSP" before you are fully endorsed and certified. Misrepresenting credentials violates canon 2 (act honorably, honestly, justly, responsibly and legally) and can lead to sanctions.</div>
+
+<div class="callout exam"><strong>Not on the exam, but essential:</strong> The exam itself does not ask about endorsement rules, but planning your experience path now ensures you can convert efficiently. Requirements and fees change, so confirm details at isc2.org before you register.</div>
+`,
+  keyTerms: [
+    ["Endorsement", "Attestation of a candidate's experience by an active ISC2 member or ISC2 itself"],
+    ["Associate of ISC2", "Status for those who pass the exam without the required experience; six years to earn it"],
+    ["Experience waiver", "One-year reduction of the experience requirement for a degree or approved credential"],
+    ["CPE", "Continuing Professional Education credit; CISSPs need 120 per three-year cycle"],
+    ["AMF", "Annual Maintenance Fee paid to ISC2 to keep a certification active"],
+    ["ISSAP / ISSEP / ISSMP", "CISSP concentrations in architecture, engineering and management"]
+  ]
+},
+{
+  id: "p5-m9-l3",
+  module: "p5-m9",
+  title: "A 12-Week CISSP Study Plan",
+  minutes: 18,
+  objectives: [
+    "Follow a structured 12-week plan covering all eight domains by weight",
+    "Combine reading, video, flashcards and practice questions effectively",
+    "Use practice test results to target weak domains",
+    "Prepare for the final week and exam day"
+  ],
+  html: `
+<p>This plan assumes about 10 to 15 hours per week and that you have completed the earlier phases of CyberPath. Adjust the pace to your life; consistency beats intensity.</p>
+
+<h3>Core resources</h3>
+<ul>
+<li><strong>The official ISC2 CISSP Exam Outline</strong> (free): your checklist. Every objective should feel familiar by exam day.</li>
+<li><strong>One primary study guide</strong>, such as the ISC2 Official Study Guide, plus the Official Practice Tests.</li>
+<li><strong>A video course</strong> for reinforcement and the manager mindset.</li>
+<li><strong>Flashcards</strong> with spaced repetition for terms, models, numbers and acronyms. Use the CyberPath flashcards for each domain.</li>
+<li><strong>Practice questions</strong>, including the CyberPath question banks. Read every explanation, including for questions you got right.</li>
+<li>A study group or community for motivation and explaining concepts to others.</li>
+</ul>
+
+<h3>The plan</h3>
+<table>
+<thead><tr><th>Week</th><th>Focus</th><th>Activities</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Orientation and Domain 1 (part 1)</td><td>Read the exam outline. Take a baseline 50-question practice test (do not worry about the score). Study ethics, governance, due care, legal and regulatory topics.</td></tr>
+<tr><td>2</td><td>Domain 1 (part 2)</td><td>BCP and BIA, risk management, threat modeling, SCRM, personnel security. Drill RTO/RPO/MTD and ALE calculations.</td></tr>
+<tr><td>3</td><td>Domain 2</td><td>Classification, data roles, lifecycle, data states, sanitization. End-of-week domain quiz.</td></tr>
+<tr><td>4</td><td>Domain 3 (part 1)</td><td>Design principles, security models, Common Criteria, architecture vulnerabilities.</td></tr>
+<tr><td>5</td><td>Domain 3 (part 2)</td><td>Cryptography, PKI, post-quantum, physical security. Build a one-page crypto cheat sheet.</td></tr>
+<tr><td>6</td><td>Domain 4</td><td>OSI deep dive, secure protocols, firewall types, segmentation, wireless, remote access. Draw the OSI table from memory.</td></tr>
+<tr><td>7</td><td>Domain 5</td><td>Authentication factors, access control models, Kerberos, federation, identity lifecycle, PAM. <strong>Mid-point full-length practice exam</strong>.</td></tr>
+<tr><td>8</td><td>Domain 6</td><td>Assessment types, pen testing, SOC reports, test techniques, metrics, disclosure.</td></tr>
+<tr><td>9</td><td>Domain 7</td><td>Investigations and evidence, change and patch management, incident management, DR sites, backups and DR tests.</td></tr>
+<tr><td>10</td><td>Domain 8</td><td>SDLC models, CMMI and SAMM, secure coding, acquired software, databases.</td></tr>
+<tr><td>11</td><td>Weak-area remediation</td><td>Review practice exam results by domain; re-study the two weakest domains; 50-75 questions per day with careful review of explanations.</td></tr>
+<tr><td>12</td><td>Final review</td><td>Full-length timed practice exam early in the week; light review of cheat sheets and flashcards; manager-mindset review; rest the day before.</td></tr>
+</tbody>
+</table>
+
+<h3>A typical study week</h3>
+<ul>
+<li><strong>Days 1-3</strong>: read the chapter or CyberPath lessons for the week's domain (about 60-90 minutes per day) and take notes in your own words.</li>
+<li><strong>Day 4</strong>: watch video coverage of the same topics; add flashcards for anything unfamiliar.</li>
+<li><strong>Day 5</strong>: practice questions for the domain (30-50) and review every explanation.</li>
+<li><strong>Day 6</strong>: mixed review of previous domains (spaced repetition) and hands-on reinforcement with CyberPath labs where relevant, such as risk calculation, crypto hashing and firewall rules.</li>
+<li><strong>Day 7</strong>: rest.</li>
+</ul>
+
+<h3>Using practice tests well</h3>
+<ul>
+<li>Track scores <strong>by domain</strong>, not just overall.</li>
+<li>For every wrong answer, write down <em>why</em> you chose it and why the correct answer is better. Patterns emerge: misreading FIRST questions, choosing technical fixes over process, confusing similar terms.</li>
+<li>Consistently scoring around 75-80% or higher on quality practice questions from multiple sources is a reasonable readiness signal. Do not memorize question banks: the real exam's questions will be new.</li>
+<li>Practice under timed conditions at least twice, without going back to change answers, to simulate CAT.</li>
+</ul>
+
+<div class="callout warn"><strong>Do not over-study the technical weeds.</strong> The CISSP is "a mile wide and an inch deep." You need to know what a Kerberos golden ticket is and why it matters, not how to forge one. Spend extra time on concepts that require judgment: risk, governance, BCP and incident management.</div>
+
+<h3>Final week and exam day</h3>
+<ul>
+<li>Review your one-page summaries: security models, OSI, crypto, BCP metrics, DR tests, evidence rules, SDLC and maturity models, the Code of Ethics canons.</li>
+<li>Get normal sleep. A tired brain misreads questions.</li>
+<li>Bring two forms of ID as required; arrive 30 minutes early; know the test center rules (lockers, palm-vein scan or photo).</li>
+<li>During the exam: read every word, identify the keyword (BEST, FIRST), think like a manager, choose, and move on. Do not try to guess how you are doing from the question count.</li>
+</ul>
+
+<div class="callout real"><strong>After you pass:</strong> complete the endorsement application promptly (within nine months), or take the Associate of ISC2 path if you need more experience. Start logging CPEs immediately; this course's continued study and labs can count when documented properly.</div>
+
+<div class="callout exam"><strong>All domains, by weight:</strong> Domain 1 (16%) gets two weeks in this plan because it is the largest and its mindset underpins every other domain. Domains 3, 4, 5 and 7 (13% each) and Domain 6 (12%) come next; Domains 2 and 8 (10% each) still warrant a full week.</div>
+
+<div class="callout tip">Teach it to learn it: explaining Bell-LaPadula or the difference between RTO and RPO to someone else, or writing a short blog post, is one of the fastest ways to discover what you do not yet understand.</div>
+`,
+  keyTerms: [
+    ["Spaced repetition", "Reviewing material at increasing intervals to strengthen long-term memory"],
+    ["Exam outline", "ISC2's official list of domains, weights and objectives for the CISSP"],
+    ["Readiness signal", "Consistent practice-test performance indicating likely exam success"],
+    ["Domain weighting", "Percentage of the exam allocated to each domain"],
+    ["Error log", "Record of wrong practice answers and the reasoning behind each mistake"]
+  ],
+  labs: ["lab-risk-calc", "lab-crypto-hash", "lab-firewall"]
+}
+);
