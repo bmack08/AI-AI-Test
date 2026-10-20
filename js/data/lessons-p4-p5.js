@@ -878,7 +878,7 @@ CP.lessons.push(
 <li><strong>Threat</strong>: a potential cause of harm (ransomware gang, flood, careless insider).</li>
 <li><strong>Vulnerability</strong>: a weakness a threat can exploit (unpatched VPN, no backups).</li>
 <li><strong>Risk</strong>: the likelihood that a threat exploits a vulnerability, combined with the impact. Often written as Risk = Likelihood x Impact.</li>
-<li><strong>Inherent risk</strong>: before controls. <strong>Residual risk</strong>: after controls. Total risk minus controls gap equals residual.</li>
+<li><strong>Inherent risk</strong>: before controls. <strong>Residual risk</strong>: after controls. In CISSP terms: total risk minus the controls gap equals residual risk.</li>
 <li><strong>Risk appetite</strong> (broad willingness) and <strong>risk tolerance</strong> (acceptable variation around a specific objective).</li>
 </ul>
 
@@ -1837,7 +1837,7 @@ CP.lessons.push(
 
 <h4>The classification process</h4>
 <ol>
-<li>Identify the data owner (custodian of the decision).</li>
+<li>Identify the data owner, who makes the classification decision.</li>
 <li>Define criteria: value, age, useful life, legal and regulatory requirements, personal association, damage if disclosed.</li>
 <li>The owner classifies the data and reviews classification periodically.</li>
 <li>Document exceptions and declassification rules (information often becomes less sensitive over time, such as quarterly results after release).</li>
