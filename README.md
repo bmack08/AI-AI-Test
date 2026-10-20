@@ -9,9 +9,9 @@ Everything runs in the browser — no server, no accounts, no build step.
 
 | | |
 |---|---|
-| **Roadmap** | 6 phases · 37 modules · ~130 lessons, from "what is an IP address" to the 8 CISSP domains |
-| **Flashcards** | ~700 cards with spaced repetition (SM-2 style: Again / Hard / Good / Easy) |
-| **Question bank** | ~600 multiple-choice questions with full explanations; module quizzes and timed mock exams (Security+, CySA+, domain-weighted CISSP) |
+| **Roadmap** | 6 phases · 37 modules · 130 lessons, from "what is an IP address" to the 8 CISSP domains |
+| **Flashcards** | 709 cards with spaced repetition (SM-2 style: Again / Hard / Good / Easy) |
+| **Question bank** | 490 multiple-choice questions with full explanations; module quizzes and timed mock exams (Security+, CySA+, domain-weighted CISSP) |
 | **Interactive labs** | 22 browser-based simulations: Linux shell investigation, mini-SIEM with an SPL-like query language, Wireshark-style packet analysis, phishing inbox, Windows Event triage, YARA engine, firewall ACL builder, IR tabletop, cloud IAM review, OWASP web vulns, prompt injection and more |
 | **Library** | 18 long-form papers citing the official standards |
 | **Progress** | XP, streaks, per-module completion, exam history, job-readiness checklist, export/import |

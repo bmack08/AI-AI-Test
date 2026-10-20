@@ -141,13 +141,13 @@ CP.labs.push({
 
     // ---- Fixes & mapping
     const FIX = {
-      sqli: { title: "SQL injection fix", owasp: "A03:2025 Injection",
+      sqli: { title: "SQL injection fix", owasp: "A05:2025 Injection",
         opts: [
           { t: "Use parameterized queries / prepared statements (bind variables) so input is never treated as SQL. Validate input and apply least-privilege DB accounts as defense in depth.", ok: true },
           { t: "Escape single quotes by doubling them and keep building the query as a string.", ok: false },
           { t: "Hide the login error messages so attackers cannot tell it worked.", ok: false }
         ], why: "Parameterization separates code from data: the engine binds the value, so <code>' OR '1'='1</code> becomes a literal username, not logic. Manual escaping is fragile and misses edge cases." },
-      xss: { title: "Reflected XSS fix", owasp: "A03:2025 Injection (Cross-Site Scripting)",
+      xss: { title: "Reflected XSS fix", owasp: "A05:2025 Injection (Cross-Site Scripting)",
         opts: [
           { t: "Contextually output-encode all user data when rendering (HTML-encode for HTML context), add a strict Content-Security-Policy, and prefer frameworks that auto-escape.", ok: true },
           { t: "Strip the word 'script' from input with a blocklist.", ok: false },
@@ -175,7 +175,7 @@ CP.labs.push({
         const pct = Math.round((foundN / 3 * 50) + (fixOk / 3 * 50));
         panes[3].querySelector("#ow-fixres").innerHTML = keys.map((k) => `<div class="alert ${FIX[k].opts[fixes[k]].ok ? "good" : "bad"}"><b>${FIX[k].title}</b> &rarr; ${FIX[k].owasp}. ${FIX[k].why}</div>`).join("")
           + `<div class="alert ${pct >= 70 ? "good" : "info"}">Found ${foundN}/3 vulnerabilities, ${fixOk}/3 correct fixes. <b>Score: ${pct}%</b>.
-            Mapping recap: SQLi and XSS both fall under <b>A03 Injection</b> in the OWASP Top 10 2025; IDOR is the canonical <b>A01 Broken Access Control</b>.</div>`;
+            Mapping recap: SQLi and XSS both fall under <b>A05 Injection</b> in the OWASP Top 10 2025; IDOR is the canonical <b>A01 Broken Access Control</b>.</div>`;
         ctx.complete(pct);
       };
     }

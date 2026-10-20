@@ -145,7 +145,7 @@
           <h3>Job-readiness checklist</h3>
           <p class="muted small">${msDone}/${ms.length} done. The curriculum teaches the skills; these prove them to an employer.</p>
           <div class="stack" id="milestones">
-            ${ms.map((m) => `<label class="row" style="align-items:flex-start;gap:8px;cursor:pointer"><input type="checkbox" data-ms="${m.id}" ${S.state.milestones[m.id] ? "checked" : ""} style="margin-top:5px"> <span>${esc(m.text)}</span></label>`).join("")}
+            ${ms.map((m) => `<label class="row" style="align-items:flex-start;gap:8px;cursor:pointer;flex-wrap:nowrap"><input type="checkbox" data-ms="${m.id}" ${S.state.milestones[m.id] ? "checked" : ""} style="margin-top:5px"> <span>${esc(m.text)}</span></label>`).join("")}
           </div>
         </div>
         <div class="card">
@@ -444,11 +444,13 @@
 
   function cisspSet(n) {
     const doms = phaseById.p5.modules.filter((m) => m.weight);
+    // Largest-remainder allocation so domain counts sum to exactly n.
+    const raw = doms.map((d) => (n * d.weight) / 100);
+    const want = raw.map(Math.floor);
+    let left = n - want.reduce((a, b) => a + b, 0);
+    raw.map((r, i) => [r - want[i], i]).sort((a, b) => b[0] - a[0]).forEach(([, i]) => { if (left > 0) { want[i]++; left--; } });
     let out = [];
-    doms.forEach((d) => {
-      const want = Math.round((n * d.weight) / 100);
-      out = out.concat(shuffle(questionsByModule[d.id] || []).slice(0, want));
-    });
+    doms.forEach((d, i) => { out = out.concat(shuffle(questionsByModule[d.id] || []).slice(0, want[i])); });
     return shuffle(out);
   }
 
